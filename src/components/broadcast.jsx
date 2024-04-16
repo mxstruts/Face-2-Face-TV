@@ -8,7 +8,7 @@ import {
 
 export function CardWithLink() {
 	return (
-		<Card className='mt-6 w-96'>
+		<Card className='mt-6 '>
 			<CardBody>
 				<Typography variant='h5' color='blue-gray' className='mb-2'>
 					Broadcasting from the St. Clair College Mediaplex in Downtown Windsor

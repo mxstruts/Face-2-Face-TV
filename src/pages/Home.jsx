@@ -2,6 +2,7 @@
 import { CardWithLink } from '../components/broadcast'
 import { TimelineWithAvatar } from '../components/comingsoon'
 import HomeHeader from '../components/homeheader'
+import ContentSection16 from '../components/newsection'
 import { ProfileCard } from '../components/thisweek'
 
 function Home() {
@@ -21,6 +22,7 @@ function Home() {
 					</div>
 				</div>
 			</div>
+			<ContentSection16 />
 		</div>
 	)
 }

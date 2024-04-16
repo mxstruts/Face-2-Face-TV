@@ -10,10 +10,10 @@ import {
 export function ProfileCard() {
 	return (
 		<>
-			<h2 className='text-2xl font-extrabold text-gray-900 text-center  my-5'>
+			<h2 className='text-2xl font-bold text-gray-900 text-center my-7'>
 				This Week On Face To Face
 			</h2>
-			<Card className='w-96'>
+			<Card className=''>
 				<CardHeader floated={false}>
 					<img src='/Rita_Miceli.jpeg' alt='profile-picture' />
 				</CardHeader>

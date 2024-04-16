@@ -12,7 +12,7 @@ import {
 export function TimelineWithAvatar() {
 	return (
 		<div className='mx-auto text-left'>
-			<h2 className='text-2xl font-extrabold text-gray-900 text-center my-5'>
+			<h2 className='text-2xl font-bold text-gray-900 text-center my-7'>
 				Coming soon
 			</h2>
 			<Timeline>
