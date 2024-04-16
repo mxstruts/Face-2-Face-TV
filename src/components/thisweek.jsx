@@ -15,7 +15,10 @@ export function ProfileCard() {
 			</h2>
 			<Card className='w-96'>
 				<CardHeader floated={false}>
-					<img src='/src/assets/Rita_Miceli.jpeg' alt='profile-picture' />
+					<img
+						src='/public/static/images/Rita_Miceli.jpeg'
+						alt='profile-picture'
+					/>
 				</CardHeader>
 				<CardBody className='text-center'>
 					<Typography variant='h4' color='blue-gray' className='mb-2'>

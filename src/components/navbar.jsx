@@ -93,7 +93,7 @@ export function NavbarSimple() {
 					F2F TV
 				</Typography> */}
 				<a href='/' className='inline-block'>
-					<img src='/public/logo.png' width={68} />
+					<img src='/public/static/images/logo.png' width={68} />
 				</a>{' '}
 				<div className='hidden lg:block'>
 					<NavList />

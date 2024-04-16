@@ -6,7 +6,11 @@ export function SimpleFooter() {
 	return (
 		<footer className='w-full bg-white mt-4'>
 			<div className='flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between'>
-				<img src='/public/logo.png' alt='logo-ct' className='w-16' />
+				<img
+					src='/public/static/images/logo.png'
+					alt='logo-ct'
+					className='w-16'
+				/>
 				<ul className='flex flex-wrap items-center gap-y-2 gap-x-8'>
 					<li>
 						<Typography

@@ -2,7 +2,7 @@
 
 function HomeHeader() {
 	const myStyle = {
-		backgroundImage: 'url(home-1-image.jpg)',
+		backgroundImage: 'url(/static/images/home-1-image.jpg)',
 		backgroundSize: 'cover',
 	}
 
