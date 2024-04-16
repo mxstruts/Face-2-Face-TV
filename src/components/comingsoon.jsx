@@ -13,7 +13,7 @@ export function TimelineWithAvatar() {
 	return (
 		<div className='mx-auto text-left'>
 			<h2 className='text-2xl font-bold text-gray-900 text-center my-7'>
-				Coming soon
+				Coming soon:
 			</h2>
 			<Timeline>
 				<TimelineItem>
@@ -27,12 +27,18 @@ export function TimelineWithAvatar() {
 								withBorder
 							/>
 						</TimelineIcon>
-						<Typography variant='h5' color='blue-gray'>
-							Chef: John Kukucka
-						</Typography>
+
+						<div className='flex flex-col gap-1'>
+							<Typography variant='h6' color='blue-gray'>
+								John Kukucka
+							</Typography>
+							<Typography variant='small' color='gray' className='font-normal'>
+								Chef
+							</Typography>
+						</div>
 					</TimelineHeader>
 					<TimelineBody className='pb-8'>
-						<Typography color='gary' className='font-normal text-gray-600'>
+						<Typography color='gray' className='font-normal text-gray-600'>
 							The key to more success is to have a lot of pillows. Put it this
 							way, it took me twenty five years to get these plants, twenty five
 							years of blood sweat and tears, and I&apos;m never giving up,
@@ -51,12 +57,18 @@ export function TimelineWithAvatar() {
 								withBorder
 							/>
 						</TimelineIcon>
-						<Typography variant='h5' color='blue-gray'>
-							Chef: Vince Del Duca
-						</Typography>
+
+						<div className='flex flex-col gap-1'>
+							<Typography variant='h6' color='blue-gray'>
+								Vince Del Duca
+							</Typography>
+							<Typography variant='small' color='gray' className='font-normal'>
+								Chef
+							</Typography>
+						</div>
 					</TimelineHeader>
 					<TimelineBody className='pb-8'>
-						<Typography color='gary' className='font-normal text-gray-600'>
+						<Typography color='gray' className='font-normal text-gray-600'>
 							The key to more success is to have a lot of pillows. Put it this
 							way, it took me twenty five years to get these plants, twenty five
 							years of blood sweat and tears, and I&apos;m never giving up,
@@ -74,12 +86,18 @@ export function TimelineWithAvatar() {
 								withBorder
 							/>
 						</TimelineIcon>
-						<Typography variant='h5' color='blue-gray'>
-							Photo Journalist: Nick Brancaccio
-						</Typography>
+
+						<div className='flex flex-col gap-1'>
+							<Typography variant='h6' color='blue-gray'>
+								Nick Brancaccio
+							</Typography>
+							<Typography variant='small' color='gray' className='font-normal'>
+								Photo Journalist
+							</Typography>
+						</div>
 					</TimelineHeader>
 					<TimelineBody>
-						<Typography color='gary' className='font-normal text-gray-600'>
+						<Typography color='gray' className='font-normal text-gray-600'>
 							The key to more success is to have a lot of pillows. Put it this
 							way, it took me twenty five years to get these plants, twenty five
 							years of blood sweat and tears, and I&apos;m never giving up,

@@ -4,14 +4,16 @@ export function SimpleFooter() {
 	const currentYear = new Date().getFullYear()
 
 	return (
-		<footer className='w-full bg-white mt-4'>
+		<footer className='w-full bg-white mt-4 p-5 rounded-xl'>
 			<div className='flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between'>
-				<img src='/logo.png' alt='logo-ct' className='w-16' />
+				<a href='/' className='inline-block'>
+					<img src='/logo.png' width={68} />
+				</a>{' '}
 				<ul className='flex flex-wrap items-center gap-y-2 gap-x-8'>
 					<li>
 						<Typography
 							as='a'
-							href='#'
+							href='/about-us'
 							color='blue-gray'
 							className='font-normal transition-colors hover:text-blue-500 focus:text-blue-500'
 						>
@@ -62,7 +64,7 @@ export function SimpleFooter() {
 				<div className='flex gap-4 text-blue-gray-900 sm:justify-center'>
 					<Typography
 						as='a'
-						href='#'
+						href='https://facebook.com'
 						className='opacity-80 transition-opacity hover:opacity-100'
 					>
 						<svg

@@ -9,7 +9,7 @@
 
 	color-scheme: light dark;
 
-	background-color: #ffffff;
+	background-color: white;
 	color: black;
 
 	font-synthesis: none;
@@ -26,7 +26,8 @@ body {
 }
 #root {
 	margin: 0 auto;
-	padding: 2rem;
+	/* padding: 0 2rem; */
+	padding: 0 1rem;
 	text-align: center;
 	max-width: 1280px;
 }

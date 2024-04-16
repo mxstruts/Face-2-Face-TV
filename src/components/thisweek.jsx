@@ -11,7 +11,7 @@ export function ProfileCard() {
 	return (
 		<>
 			<h2 className='text-2xl font-bold text-gray-900 text-center my-7'>
-				This Week On Face To Face
+				This Week On Face To Face:
 			</h2>
 			<Card className=''>
 				<CardHeader floated={false}>

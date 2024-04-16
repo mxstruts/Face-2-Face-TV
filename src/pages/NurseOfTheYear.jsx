@@ -1,7 +1,13 @@
 'use client'
 
+import { DefaultTable } from '../components/table'
+
 function NurseOfTheYear() {
-	return <div>NurseOfTheYear</div>
+	return (
+		<div>
+			<DefaultTable />
+		</div>
+	)
 }
 
 export default NurseOfTheYear
