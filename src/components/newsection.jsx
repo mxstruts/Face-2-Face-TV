@@ -5,7 +5,7 @@ export function ContentSection16() {
 		<section>
 			<div className='mx-auto max-w-screen-md'>
 				<img
-					src={`/public/home-3-image.jpg`}
+					src='/home-3-image.jpg'
 					alt='team work'
 					className='mb-4 h-[28rem] w-full rounded-xl object-cover'
 				/>
