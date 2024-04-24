@@ -16,7 +16,7 @@ export function BackgroundBlogCard() {
 				floated={false}
 				shadow={false}
 				color='transparent'
-				className="absolute inset-0 m-0 h-full w-full rounded-none bg-[url('/public/static//images/showtime-img-1.jpg')] bg-cover bg-center"
+				className="absolute inset-0 m-0 h-full w-full rounded-none bg-[url('/public/static/images/showtime-img-1.jpg')] bg-cover bg-center"
 			>
 				<div className='to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-t from-black/80 via-black/50' />
 			</CardHeader>
@@ -39,7 +39,7 @@ export function BackgroundBlogCard() {
 					variant='circular'
 					alt='tania andrew'
 					className='border-2 border-white'
-					src='/public/static/images/your-tv.jpg'
+					src='/your-tv.jpg'
 				/>
 			</CardBody>
 		</Card>
