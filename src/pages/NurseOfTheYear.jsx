@@ -1,6 +1,6 @@
 'use client'
 
-import { DefaultTable } from '../components/table'
+import { DefaultTable } from '../components/Home/table'
 
 function NurseOfTheYear() {
 	return (

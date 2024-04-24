@@ -1,9 +1,9 @@
 'use client'
-import { CardWithLink } from '../components/broadcast'
-import { TimelineWithAvatar } from '../components/comingsoon'
-import HomeHeader from '../components/homeheader'
-import ContentSection16 from '../components/newsection'
-import { ProfileCard } from '../components/thisweek'
+import { CardWithLink } from '../components/Home/broadcast'
+import { TimelineWithAvatar } from '../components/Home/comingsoon'
+import HomeHeader from '../components/Home/homeheader'
+import ContentSection16 from '../components/Home/newsection'
+import { ProfileCard } from '../components/Home/thisweek'
 
 function Home() {
 	return (
