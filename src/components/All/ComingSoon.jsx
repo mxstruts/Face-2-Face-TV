@@ -52,18 +52,18 @@ function ComingSoon() {
 										</div>
 									)}
 								</TimelineIcon>
-								<div className='flex flex-col gap-1'>
+								<div className='flex flex-col'>
 									<Typography variant='h6' color='blue-gray'>
 										{item.name}
 									</Typography>
 									{item.role && (
-										<Typography variant='small' color='gray' className='font-normal'>
+										<Typography variant='small' color='#808080bc' className='font-medium'>
 											{item.role}
 										</Typography>
 									)}
 								</div>
 							</TimelineHeader>
-							<TimelineBody className='pb-8'>
+							<TimelineBody className='pb-5 text-left'>
 								<Typography color='gray' className='font-normal text-gray-600'>
 									{item.description}
 								</Typography>
