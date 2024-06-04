@@ -57,7 +57,7 @@ function ComingSoon() {
 										{item.name}
 									</Typography>
 									{item.role && (
-										<Typography variant='small' color='#808080bc' className='font-medium'>
+										<Typography variant='small' color='#5a5555bc' className='font-medium text-left'>
 											{item.role}
 										</Typography>
 									)}

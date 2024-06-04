@@ -34,9 +34,6 @@ function ThisWeek() {
 
 	return (
 		<div className='max-w-7xl p-8 m-auto'>
-			<h5 className='mb-5 text-2xl font-bold tracking-tight text-gray-900 dark:text-white pt-5 pb-3 '>
-				This Week On Face To Face:
-			</h5>
 			<div className='flex flex-col md:flex-row mb-8'>
 				{latestItem ? (
 					<Card>
