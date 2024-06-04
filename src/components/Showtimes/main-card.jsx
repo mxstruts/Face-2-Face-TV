@@ -10,7 +10,7 @@ export function BackgroundBlogCard() {
 	return (
 		<Card
 			shadow={false}
-			className='relative grid h-[45rem] w-full max-w-full items-end justify-center overflow-hidden text-center'
+			className='relative grid h-[45rem] w-full max-w-full items-end justify-center overflow-hidden text-center mb-3'
 		>
 			<CardHeader
 				floated={false}

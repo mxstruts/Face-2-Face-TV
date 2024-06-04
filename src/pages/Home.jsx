@@ -1,9 +1,11 @@
 'use client'
 import { CardWithLink } from '../components/Home/broadcast'
-import { TimelineWithAvatar } from '../components/Home/comingsoon'
+import { TimelineWithAvatar } from '../components/All/coming-soon'
 import HomeHeader from '../components/Home/homeheader'
 import ContentSection16 from '../components/Home/newsection'
 import { ProfileCard } from '../components/Home/thisweek'
+import ComingSoon from '../components/All/ComingSoon'
+import ThisWeek from '../components/All/ThisWeek'
 
 function Home() {
 	return (
@@ -12,12 +14,13 @@ function Home() {
 			<div className='flex flex-col  md:flex-row space-y-4 sm:space-y-0 md:space-x-4'>
 				<div className='w-full sm:w-1/2 flex justify-center'>
 					<div className='max-w-md mx-auto'>
-						<TimelineWithAvatar />
+						<h2 className='text-2xl font-bold text-gray-900 text-center my-7'>Coming soon:</h2>
+						<ComingSoon />
 					</div>
 				</div>
 				<div className='w-full sm:w-1/2 flex justify-center'>
 					<div className='max-w-md mx-auto'>
-						<ProfileCard />
+						<ThisWeek />
 						<CardWithLink />
 					</div>
 				</div>

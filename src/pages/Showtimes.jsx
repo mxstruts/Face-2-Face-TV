@@ -10,7 +10,7 @@ function Showtimes() {
 		<>
 			{/* <HomeHeader /> */}
 			<BackgroundBlogCard />
-			<div className='w-full flex space-x-3 flex-col md:flex-row'>
+			<div className='w-full flex space-x-3 flex-col md:flex-row '>
 				<ListWithBadge />
 				<CardWithLink />
 			</div>
