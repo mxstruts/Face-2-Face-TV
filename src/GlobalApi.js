@@ -1,4 +1,3 @@
-import { avatar } from '@material-tailwind/react'
 import { gql, request } from 'graphql-request'
 
 const MASTER_URL = 'https://api-ca-central-1.hygraph.com/v2/cluznoumc17fl08w4ln0esf9q/master'
@@ -46,10 +45,10 @@ const GetThisWeek = async () => {
 	return result
 }
 
-const AddComingSoon = async (name, description, role, picture) => {
+const AddComingSoon = async (name, description, role, avatar) => {
 	const query = gql`
 		mutation createComingSoon {
-			createComingSoon(data: { name: "${name}", description: "${description}", role: "${role}", picture: { create: { url: "${picture}" } }) {
+			createComingSoon(data: { name: "${name}", description: "${description}", role: "${role}", avatar: { create: { url: "${avatar}" } }) {
 				name
 				description
 				role
