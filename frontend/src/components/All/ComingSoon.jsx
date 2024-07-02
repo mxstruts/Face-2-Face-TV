@@ -11,38 +11,37 @@ import {
 } from '@material-tailwind/react'
 
 import { useEffect, useState } from 'react'
-import GlobalApi from '../../GlobalApi'
+import axios from 'axios'
 
 function ComingSoon() {
 	const [comingSoon, setComingSoon] = useState([])
-	useEffect(() => {
-		getComingSoon()
-	}, [])
 
-	const getComingSoon = async () => {
-		try {
-			const data = await GlobalApi.GetComingSoon()
-			if (data && data.comingSoons) {
-				setComingSoon(data.comingSoons.reverse().slice(0, 4))
+	useEffect(() => {
+		const fetchAllComingSoon = async () => {
+			try {
+				const res = await axios.get('http://localhost:8800/ComingSoon')
+				// console.log(res)
+				setComingSoon(res.data)
+			} catch (err) {
+				console.log(err)
 			}
-		} catch (error) {
-			console.error('Failed to fetch coming soon data:', error)
 		}
-	}
+		fetchAllComingSoon()
+	}, [])
 
 	return (
 		<div className='max-w-7xl p-8 m-auto'>
 			<div className='flex flex-col md:flex-row mb-8'>
 				<Timeline>
-					{comingSoon.map((item, index) => (
+					{comingSoon.slice(-4).map((item, index) => (
 						<TimelineItem key={index}>
 							<TimelineConnector />
 							<TimelineHeader>
 								<TimelineIcon className='p-0'>
-									{item.avatar ? (
+									{item.image_url ? (
 										<Avatar
 											size='xl'
-											src={item.avatar.url}
+											src={`http://localhost:8800/uploads/${item.image_url}`}
 											alt={`${item.name}'s avatar`}
 											withBorder
 										/>
@@ -56,11 +55,11 @@ function ComingSoon() {
 									<Typography variant='h6' color='blue-gray'>
 										{item.name}
 									</Typography>
-									{item.role && (
+									{/* {item.role && (
 										<Typography variant='small' color='#5a5555bc' className='font-medium text-left'>
 											{item.role}
 										</Typography>
-									)}
+									)} */}
 								</div>
 							</TimelineHeader>
 							<TimelineBody className='pb-5 text-left'>

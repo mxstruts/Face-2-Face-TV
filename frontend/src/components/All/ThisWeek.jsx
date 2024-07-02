@@ -7,39 +7,39 @@ import {
 	Typography,
 	Tooltip,
 } from '@material-tailwind/react'
-
+import axios from 'axios'
 import { useEffect, useState } from 'react'
-import GlobalApi from '../../GlobalApi'
 
 function ThisWeek() {
 	const [thisWeek, setThisWeek] = useState([])
 	const [latestItem, setLatestItem] = useState(null)
 
 	useEffect(() => {
-		getThisWeek()
-	}, [])
-
-	const getThisWeek = async () => {
-		try {
-			const data = await GlobalApi.GetThisWeek()
-			if (data && data.thisWeeks && data.thisWeeks.length > 0) {
-				const mostRecentItem = data.thisWeeks[data.thisWeeks.length - 1]
+		const fetchAllThisWeek = async () => {
+			try {
+				const res = await axios.get('http://localhost:8800/ThisWeek')
+				console.log(res)
+				setThisWeek(res.data)
+				const mostRecentItem = res.data[res.data.length - 1]
 				setLatestItem(mostRecentItem)
 				console.log(mostRecentItem)
+			} catch (err) {
+				console.log(err)
 			}
-		} catch (error) {
-			console.error("Failed to fetch this week's data:", error)
 		}
-	}
-
+		fetchAllThisWeek()
+	}, [])
 	return (
 		<div className='max-w-7xl p-8 m-auto'>
 			<div className='flex flex-col md:flex-row mb-8'>
 				{latestItem ? (
 					<Card>
 						<CardHeader floated={false}>
-							{latestItem.picture ? (
-								<img src={latestItem.picture.url} alt={`${latestItem.name}'s avatar`} />
+							{latestItem.image_url ? (
+								<img
+									src={`http://localhost:8800/uploads/${latestItem.image_url}`}
+									alt={latestItem.avatar_url}
+								/>
 							) : (
 								<div className='w-full h-48 bg-gray-200 flex items-center justify-center'>
 									<span>No Image</span>
