@@ -18,10 +18,10 @@ const Update = () => {
 	useEffect(() => {
 		const fetchItem = async () => {
 			try {
-				const res = await axios.get(`https://face-2-face-tv-server.vercel.app/${section}/${id}`)
+				const res = await axios.get(`http://localhost:8800/${section}/${id}`)
 				setItem(res.data)
 				if (res.data.image_url) {
-					setPreview(`https://face-2-face-tv-server.vercel.app/uploads/${res.data.image_url}`)
+					setPreview(`http://localhost:8800/uploads/${res.data.image_url}`)
 				}
 			} catch (err) {
 				console.log(err)
@@ -57,7 +57,7 @@ const Update = () => {
 		}
 
 		try {
-			await axios.put(`https://face-2-face-tv-server.vercel.app/${section}/${id}`, formData, {
+			await axios.put(`http://localhost:8800/${section}/${id}`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},

@@ -1,5 +1,5 @@
 import express from 'express'
-import mysql from 'mysql2' // Change this line
+import mysql from 'mysql2'
 import cors from 'cors'
 import multer from 'multer'
 import path from 'path'
@@ -9,11 +9,10 @@ const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const db = mysql.createConnection({
-	host: 'db-mysql-nyc3-15327-do-user-16800631-0.c.db.ondigitalocean.com',
-	user: 'doadmin',
-	password: 'AVNS_cSPD6SX6u8CHF6yoXQv',
-	database: 'defaultdb',
-	port: 25060,
+	host: 'localhost', // Assuming MySQL is running on the same VPS
+	user: 'root', // Your MySQL username
+	password: 'Bullshit128', // Your MySQL password
+	database: 'face_2_face_tv', // Your MySQL database name
 })
 
 const storage = multer.diskStorage({
@@ -21,16 +20,16 @@ const storage = multer.diskStorage({
 		cb(null, 'uploads/')
 	},
 	filename: function (req, file, cb) {
-		cb(null, Date.now() + path.extname(file.originalname)) // Append extension
+		cb(null, Date.now() + path.extname(file.originalname))
 	},
 })
 
 const upload = multer({ storage: storage })
-// to send from html body
+
 app.use(express.json())
 app.use(
 	cors({
-		origin: 'https://face-2-face-tv-client.vercel.app',
+		origin: '*',
 	})
 )
 app.use('/uploads', express.static('uploads'))
@@ -54,14 +53,15 @@ app.get('/ThisWeek', (req, res) => {
 		return res.json(data)
 	})
 })
+
 app.get('/ComingSoon/:id', (req, res) => {
 	const itemId = req.params.id
 	const q = 'SELECT * FROM coming_soon WHERE id = ?'
 	db.query(q, [itemId], (err, data) => {
-		if (err) return res.status(500).json(err) // Handle error
-		if (data.length === 0) return res.status(404).json({ message: 'Item not found' }) // Handle not found
+		if (err) return res.status(500).json(err)
+		if (data.length === 0) return res.status(404).json({ message: 'Item not found' })
 
-		const item = data[0] // Assuming id is unique, so we take the first result
+		const item = data[0]
 		res.json(item)
 	})
 })
@@ -70,10 +70,10 @@ app.get('/ThisWeek/:id', (req, res) => {
 	const itemId = req.params.id
 	const q = 'SELECT * FROM this_week WHERE id = ?'
 	db.query(q, [itemId], (err, data) => {
-		if (err) return res.status(500).json(err) // Handle error
-		if (data.length === 0) return res.status(404).json({ message: 'Item not found' }) // Handle not found
+		if (err) return res.status(500).json(err)
+		if (data.length === 0) return res.status(404).json({ message: 'Item not found' })
 
-		const item = data[0] // Assuming id is unique, so we take the first result
+		const item = data[0]
 		res.json(item)
 	})
 })
@@ -96,6 +96,7 @@ app.post('/ComingSoon', upload.single('image'), (req, res) => {
 		return res.status(200).json('Coming Soon has been added.')
 	})
 })
+
 app.post('/ThisWeek', upload.single('image'), (req, res) => {
 	const { name, role, description, image_alt } = req.body
 
@@ -122,9 +123,10 @@ app.delete('/ComingSoon/:id', (req, res) => {
 
 	db.query(q, [comningSoonId], (err, data) => {
 		if (err) return res.json(err)
-		return res.json('Comig Soon has been deleted.')
+		return res.json('Coming Soon has been deleted.')
 	})
 })
+
 app.delete('/ThisWeek/:id', (req, res) => {
 	const thisWeekId = req.params.id
 	const q = 'DELETE FROM this_week WHERE id=?'
@@ -141,15 +143,13 @@ app.put('/:section/:id', upload.single('image'), (req, res) => {
 	let q
 	let values
 
-	// Update database with new image URL or other fields
-	console.log(section)
 	if (section === 'ThisWeek') {
 		q = `UPDATE this_week SET name=?, description=?, role=?, image_url=?, image_alt=? WHERE id=?`
 		values = [
 			req.body.name,
 			req.body.description,
 			req.body.role,
-			req.file ? req.file.filename : req.body.image_url, // Use new filename if file uploaded
+			req.file ? req.file.filename : req.body.image_url,
 			req.body.image_alt,
 			itemId,
 		]
@@ -158,7 +158,7 @@ app.put('/:section/:id', upload.single('image'), (req, res) => {
 		values = [
 			req.body.name,
 			req.body.description,
-			req.file ? req.file.filename : req.body.image_url, // Use new filename if file uploaded
+			req.file ? req.file.filename : req.body.image_url,
 			req.body.image_alt,
 			itemId,
 		]
@@ -173,6 +173,7 @@ app.put('/:section/:id', upload.single('image'), (req, res) => {
 app.listen(8800, () => {
 	console.log('Connected to backend.')
 })
+
 app.use((err, req, res, next) => {
 	console.error(err.stack)
 	res.status(500).send('Something broke!')

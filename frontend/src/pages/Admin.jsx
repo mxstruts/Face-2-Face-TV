@@ -9,7 +9,7 @@ const Admin = () => {
 	useEffect(() => {
 		const fetchAllComingSoon = async () => {
 			try {
-				const res = await axios.get('https://face-2-face-tv-server.vercel.app/ComingSoon')
+				const res = await axios.get('http://localhost:8800/ComingSoon')
 				setComingSoon(res.data)
 			} catch (err) {
 				console.log(err)
@@ -18,7 +18,7 @@ const Admin = () => {
 
 		const fetchAllThisWeek = async () => {
 			try {
-				const res = await axios.get('https://face-2-face-tv-server.vercel.app/ThisWeek')
+				const res = await axios.get('http://localhost:8800/ThisWeek')
 				setThisWeek(res.data)
 			} catch (err) {
 				console.log(err)
@@ -31,7 +31,7 @@ const Admin = () => {
 
 	const handleDelete = async (id, section) => {
 		try {
-			await axios.delete(`https://face-2-face-tv-server.vercel.app/${section}/${id}`)
+			await axios.delete(`http://localhost:8800/${section}/${id}`)
 			// Refresh the data after deletion
 			if (section === 'ComingSoon') {
 				setComingSoon(prevState => prevState.filter(item => item.id !== id))
@@ -55,7 +55,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`https://face-2-face-tv-server.vercel.app/uploads/${item.image_url}`}
+									src={`http://localhost:8800/uploads/${item.image_url}`}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>
@@ -92,7 +92,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`https://face-2-face-tv-server.vercel.app/uploads/${item.image_url}`}
+									src={`http://localhost:8800/uploads/${item.image_url}`}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>
