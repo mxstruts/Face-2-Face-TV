@@ -28,7 +28,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 // to send from html body
 app.use(express.json())
-app.use(cors())
+app.use(
+	cors({
+		origin: 'https://face-2-face-tv-client-8o2fux33i-mxstruts-projects.vercel.app',
+	})
+)
 app.use('/uploads', express.static('uploads'))
 
 app.get('/', (req, res) => {
