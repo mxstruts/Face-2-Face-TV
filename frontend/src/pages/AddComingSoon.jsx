@@ -31,7 +31,7 @@ const AddComingSoon = () => {
 		formData.append('image', file) // include the file in the form data
 
 		try {
-			await axios.post('http://face-2-face-tv-server.vercel.app/ComingSoon', formData, {
+			await axios.post('https://face-2-face-tv-server.vercel.app/ComingSoon', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
