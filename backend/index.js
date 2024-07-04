@@ -9,10 +9,11 @@ const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const db = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '123456',
-	database: 'face-2-face-tv',
+	host: 'db-mysql-nyc3-15327-do-user-16800631-0.c.db.ondigitalocean.com',
+	user: 'doadmin',
+	password: 'AVNS_cSPD6SX6u8CHF6yoXQv',
+	database: 'defaultdb',
+	port: 25060,
 })
 
 const storage = multer.diskStorage({
@@ -167,4 +168,8 @@ app.put('/:section/:id', upload.single('image'), (req, res) => {
 
 app.listen(8800, () => {
 	console.log('Connected to backend.')
+})
+app.use((err, req, res, next) => {
+	console.error(err.stack)
+	res.status(500).send('Something broke!')
 })
