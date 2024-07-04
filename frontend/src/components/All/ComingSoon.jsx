@@ -19,7 +19,7 @@ function ComingSoon() {
 	useEffect(() => {
 		const fetchAllComingSoon = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ComingSoon')
+				const res = await axios.get('http://face-2-face-tv-server.vercel.app/ComingSoon')
 				// console.log(res)
 				setComingSoon(res.data)
 			} catch (err) {
@@ -41,7 +41,7 @@ function ComingSoon() {
 									{item.image_url ? (
 										<Avatar
 											size='xl'
-											src={`http://localhost:8800/uploads/${item.image_url}`}
+											src={`http://face-2-face-tv-server.vercel.app/uploads/${item.image_url}`}
 											alt={`${item.name}'s avatar`}
 											withBorder
 										/>
