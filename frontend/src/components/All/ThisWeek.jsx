@@ -17,7 +17,7 @@ function ThisWeek() {
 	useEffect(() => {
 		const fetchAllThisWeek = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ThisWeek')
+				const res = await axios.get('https://face-2-face-tv-server.vercel.app/ThisWeek')
 				console.log(res)
 				setThisWeek(res.data)
 				const mostRecentItem = res.data[res.data.length - 1]
@@ -37,7 +37,7 @@ function ThisWeek() {
 						<CardHeader floated={false}>
 							{latestItem.image_url ? (
 								<img
-									src={`http://localhost:8800/uploads/${latestItem.image_url}`}
+									src={`http://https://face-2-face-tv-server.vercel.app/uploads/${latestItem.image_url}`}
 									alt={latestItem.avatar_url}
 								/>
 							) : (

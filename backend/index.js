@@ -30,7 +30,7 @@ const upload = multer({ storage: storage })
 app.use(express.json())
 app.use(
 	cors({
-		origin: 'https://face-2-face-tv-client-8o2fux33i-mxstruts-projects.vercel.app',
+		origin: 'https://https://face-2-face-tv-client.vercel.app',
 	})
 )
 app.use('/uploads', express.static('uploads'))

@@ -33,7 +33,7 @@ const Add = () => {
 		formData.append('image_alt', thisWeek.image_alt)
 
 		try {
-			await axios.post('http://localhost:8800/ThisWeek', formData, {
+			await axios.post('https://face-2-face-tv-server.vercel.app/ThisWeek', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
