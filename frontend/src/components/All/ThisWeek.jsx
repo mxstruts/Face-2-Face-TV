@@ -9,6 +9,7 @@ import {
 } from '@material-tailwind/react'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { backend_url } from '../../utils/constants'
 
 function ThisWeek() {
 	const [thisWeek, setThisWeek] = useState([])
@@ -17,7 +18,7 @@ function ThisWeek() {
 	useEffect(() => {
 		const fetchAllThisWeek = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ThisWeek')
+				const res = await axios.get(`${backend_url}/ThisWeek`)
 				console.log(res)
 				setThisWeek(res.data)
 				const mostRecentItem = res.data[res.data.length - 1]
@@ -37,7 +38,7 @@ function ThisWeek() {
 						<CardHeader floated={false}>
 							{latestItem.image_url ? (
 								<img
-									src={`http://localhost:8800/uploads/${latestItem.image_url}`}
+									src={`${backend_url}/uploads/${latestItem.image_url}`}
 									alt={latestItem.avatar_url}
 								/>
 							) : (

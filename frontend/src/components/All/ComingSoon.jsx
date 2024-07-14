@@ -12,6 +12,7 @@ import {
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { backend_url } from '../../utils/constants'
 
 function ComingSoon() {
 	const [comingSoon, setComingSoon] = useState([])
@@ -19,7 +20,7 @@ function ComingSoon() {
 	useEffect(() => {
 		const fetchAllComingSoon = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ComingSoon')
+				const res = await axios.get(`${backend_url}/ComingSoon`)
 				// console.log(res)
 				setComingSoon(res.data)
 			} catch (err) {
@@ -41,7 +42,7 @@ function ComingSoon() {
 									{item.image_url ? (
 										<Avatar
 											size='xl'
-											src={`http://localhost:8800/uploads/${item.image_url}`}
+											src={`${backend_url}/uploads/${item.image_url}`}
 											alt={`${item.name}'s avatar`}
 											withBorder
 										/>

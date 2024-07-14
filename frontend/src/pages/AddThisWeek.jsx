@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import FileInput from '../components/Admin/choose-file'
+import { backend_url } from '../utils/constants'
 
 const Add = () => {
 	const [thisWeek, setThisWeek] = useState({
@@ -33,7 +34,7 @@ const Add = () => {
 		formData.append('image_alt', thisWeek.image_alt)
 
 		try {
-			await axios.post('http://localhost:8800/ThisWeek', formData, {
+			await axios.post(`${backend_url}/ThisWeek`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},

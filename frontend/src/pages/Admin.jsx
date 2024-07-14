@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { backend_url } from '../utils/constants'
 
 const Admin = () => {
 	const [comingSoon, setComingSoon] = useState([])
@@ -9,7 +10,7 @@ const Admin = () => {
 	useEffect(() => {
 		const fetchAllComingSoon = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ComingSoon')
+				const res = await axios.get(`${backend_url}/ComingSoon`)
 				setComingSoon(res.data)
 			} catch (err) {
 				console.log(err)
@@ -18,7 +19,7 @@ const Admin = () => {
 
 		const fetchAllThisWeek = async () => {
 			try {
-				const res = await axios.get('http://localhost:8800/ThisWeek')
+				const res = await axios.get(`${backend_url}/ThisWeek`)
 				setThisWeek(res.data)
 			} catch (err) {
 				console.log(err)
@@ -31,7 +32,7 @@ const Admin = () => {
 
 	const handleDelete = async (id, section) => {
 		try {
-			await axios.delete(`http://localhost:8800/${section}/${id}`)
+			await axios.delete(`${backend_url}/${section}/${id}`)
 			// Refresh the data after deletion
 			if (section === 'ComingSoon') {
 				setComingSoon(prevState => prevState.filter(item => item.id !== id))
@@ -55,7 +56,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`http://localhost:8800/uploads/${item.image_url}`}
+									src={`${backend_url}/uploads/${item.image_url}`}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>
@@ -92,7 +93,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`http://localhost:8800/uploads/${item.image_url}`}
+									src={`${backend_url}/uploads/${item.image_url}`}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>

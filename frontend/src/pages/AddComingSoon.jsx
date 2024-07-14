@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import FileInput from '../components/Admin/choose-file'
+import { backend_url } from '../utils/constants'
 
 const AddComingSoon = () => {
 	const [item, setItem] = useState({
@@ -31,7 +31,7 @@ const AddComingSoon = () => {
 		formData.append('image', file) // include the file in the form data
 
 		try {
-			await axios.post('http://localhost:8800/ComingSoon', formData, {
+			await axios.post(`${backend_url}/ComingSoon`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},

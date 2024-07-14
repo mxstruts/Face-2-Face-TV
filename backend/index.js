@@ -9,10 +9,11 @@ const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const db = mysql.createConnection({
-	host: 'localhost', // Assuming MySQL is running on the same VPS
+	host: 'roundhouse.proxy.rlwy.net', // Assuming MySQL is running on the same VPS
 	user: 'root', // Your MySQL username
-	password: 'Bullshit128', // Your MySQL password
-	database: 'face_2_face_tv', // Your MySQL database name
+	password: 'TfVXtOEOvUgrNcTtVLeDDiGYoIkePZpZ', // Your MySQL password
+	database: 'railway', // Your MySQL database name
+	port: 55680, // Default MySQL port
 })
 
 const storage = multer.diskStorage({

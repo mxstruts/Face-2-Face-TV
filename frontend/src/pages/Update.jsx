@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { backend_url } from '../utils/constants'
 
 const Update = () => {
 	const { section, id } = useParams()
@@ -18,10 +19,10 @@ const Update = () => {
 	useEffect(() => {
 		const fetchItem = async () => {
 			try {
-				const res = await axios.get(`http://localhost:8800/${section}/${id}`)
+				const res = await axios.get(`${backend_url}/${section}/${id}`)
 				setItem(res.data)
 				if (res.data.image_url) {
-					setPreview(`http://localhost:8800/uploads/${res.data.image_url}`)
+					setPreview(`${backend_url}/uploads/${res.data.image_url}`)
 				}
 			} catch (err) {
 				console.log(err)
@@ -57,7 +58,7 @@ const Update = () => {
 		}
 
 		try {
-			await axios.put(`http://localhost:8800/${section}/${id}`, formData, {
+			await axios.put(`${backend_url}/${section}/${id}`, formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
