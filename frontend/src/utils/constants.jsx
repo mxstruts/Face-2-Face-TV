@@ -1,1 +1,1 @@
-export const backend_url = 'face-2-face-tv-production.up.railway.app'
+export const backend_url = 'https://backend-production-dd16.up.railway.app'
