@@ -56,7 +56,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`${backend_url}/uploads/${item.image_url}`}
+									src={item.image_url}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>
@@ -93,7 +93,7 @@ const Admin = () => {
 						>
 							{item.image_url && (
 								<img
-									src={`${backend_url}/uploads/${item.image_url}`}
+									src={item.image_url}
 									alt={item.image_alt}
 									className='w-36 h-36 object-cover rounded mb-4'
 								/>

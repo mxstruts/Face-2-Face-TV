@@ -42,7 +42,7 @@ function ComingSoon() {
 									{item.image_url ? (
 										<Avatar
 											size='xl'
-											src={`${backend_url}/uploads/${item.image_url}`}
+											src={item.image_url}
 											alt={`${item.name}'s avatar`}
 											withBorder
 										/>

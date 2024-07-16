@@ -37,10 +37,7 @@ function ThisWeek() {
 					<Card>
 						<CardHeader floated={false}>
 							{latestItem.image_url ? (
-								<img
-									src={`${backend_url}/uploads/${latestItem.image_url}`}
-									alt={latestItem.avatar_url}
-								/>
+								<img src={latestItem.image_url} alt={latestItem.avatar_url} />
 							) : (
 								<div className='w-full h-48 bg-gray-200 flex items-center justify-center'>
 									<span>No Image</span>

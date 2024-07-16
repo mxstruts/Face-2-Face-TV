@@ -4,36 +4,24 @@ import cors from 'cors'
 import multer from 'multer'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { uploadToCloudinary } from './cloudinaryHelper.js'
 
 const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const db = mysql.createConnection({
-	host: 'roundhouse.proxy.rlwy.net', // Assuming MySQL is running on the same VPS
+	host: 'viaduct.proxy.rlwy.net', // Assuming MySQL is running on the same VPS
 	user: 'root', // Your MySQL username
-	password: 'TfVXtOEOvUgrNcTtVLeDDiGYoIkePZpZ', // Your MySQL password
+	password: 'AxPoNQasrABiILposrutoBqPRAwUJLGd', // Your MySQL password
 	database: 'railway', // Your MySQL database name
-	port: 55680, // Default MySQL port
+	port: 30863, // Default MySQL port
 })
 
-const storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, 'uploads/')
-	},
-	filename: function (req, file, cb) {
-		cb(null, Date.now() + path.extname(file.originalname))
-	},
-})
-
+const storage = multer.memoryStorage() // Use memory storage for multer
 const upload = multer({ storage: storage })
 
 app.use(express.json())
-app.use(
-	cors({
-		origin: '*',
-	})
-)
-app.use('/uploads', express.static('uploads'))
+app.use(cors({ origin: '*' }))
 
 app.get('/', (req, res) => {
 	res.json('Hello World')
@@ -79,12 +67,16 @@ app.get('/ThisWeek/:id', (req, res) => {
 	})
 })
 
-app.post('/ComingSoon', upload.single('image'), (req, res) => {
+app.post('/ComingSoon', upload.single('image'), async (req, res) => {
 	const { name, description, image_alt } = req.body
 
 	let image_url = null
 	if (req.file) {
-		image_url = req.file.filename
+		try {
+			image_url = await uploadToCloudinary(req.file.buffer)
+		} catch (error) {
+			return res.status(500).json({ error: error.message })
+		}
 	}
 
 	const q = 'INSERT INTO coming_soon (name, description, image_url, image_alt) VALUES (?, ?, ?, ?)'
@@ -98,12 +90,16 @@ app.post('/ComingSoon', upload.single('image'), (req, res) => {
 	})
 })
 
-app.post('/ThisWeek', upload.single('image'), (req, res) => {
+app.post('/ThisWeek', upload.single('image'), async (req, res) => {
 	const { name, role, description, image_alt } = req.body
 
 	let image_url = null
 	if (req.file) {
-		image_url = req.file.filename
+		try {
+			image_url = await uploadToCloudinary(req.file.buffer)
+		} catch (error) {
+			return res.status(500).json({ error: error.message })
+		}
 	}
 
 	const q =
@@ -119,10 +115,10 @@ app.post('/ThisWeek', upload.single('image'), (req, res) => {
 })
 
 app.delete('/ComingSoon/:id', (req, res) => {
-	const comningSoonId = req.params.id
+	const comingSoonId = req.params.id
 	const q = 'DELETE FROM coming_soon WHERE id=?'
 
-	db.query(q, [comningSoonId], (err, data) => {
+	db.query(q, [comingSoonId], (err, data) => {
 		if (err) return res.json(err)
 		return res.json('Coming Soon has been deleted.')
 	})
@@ -138,11 +134,20 @@ app.delete('/ThisWeek/:id', (req, res) => {
 	})
 })
 
-app.put('/:section/:id', upload.single('image'), (req, res) => {
+app.put('/:section/:id', upload.single('image'), async (req, res) => {
 	const section = req.params.section
 	const itemId = req.params.id
 	let q
 	let values
+	let image_url = req.body.image_url
+
+	if (req.file) {
+		try {
+			image_url = await uploadToCloudinary(req.file.buffer)
+		} catch (error) {
+			return res.status(500).json({ error: error.message })
+		}
+	}
 
 	if (section === 'ThisWeek') {
 		q = `UPDATE this_week SET name=?, description=?, role=?, image_url=?, image_alt=? WHERE id=?`
@@ -150,19 +155,13 @@ app.put('/:section/:id', upload.single('image'), (req, res) => {
 			req.body.name,
 			req.body.description,
 			req.body.role,
-			req.file ? req.file.filename : req.body.image_url,
+			image_url,
 			req.body.image_alt,
 			itemId,
 		]
 	} else {
 		q = `UPDATE coming_soon SET name=?, description=?, image_url=?, image_alt=? WHERE id=?`
-		values = [
-			req.body.name,
-			req.body.description,
-			req.file ? req.file.filename : req.body.image_url,
-			req.body.image_alt,
-			itemId,
-		]
+		values = [req.body.name, req.body.description, image_url, req.body.image_alt, itemId]
 	}
 
 	db.query(q, values, (err, data) => {
