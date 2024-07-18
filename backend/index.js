@@ -4,20 +4,22 @@ import cors from 'cors'
 import multer from 'multer'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { uploadToCloudinary } from './cloudinaryHelper.js'
+import Client from 'ssh2-sftp-client'
 
 const app = express()
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const db = mysql.createConnection({
-	host: '93.183.69.97', // Assuming MySQL is running on the same VPS
-	user: 'root', // Your MySQL username
-	password: 'Bullshit128', // Your MySQL password
-	database: 'face-2-face-tv', // Your MySQL database name
-	port: 3306, // Default MySQL port
+	host: '93.183.69.97',
+	user: 'root',
+	password: 'Bullshit128',
+	database: 'face-2-face-tv',
+	port: 3306,
 })
 
-const storage = multer.memoryStorage() // Use memory storage for multer
+const sftp = new Client()
+
+const storage = multer.memoryStorage() // Store files in memory
 const upload = multer({ storage: storage })
 
 app.use(express.json())
@@ -69,13 +71,24 @@ app.get('/ThisWeek/:id', (req, res) => {
 
 app.post('/ComingSoon', upload.single('image'), async (req, res) => {
 	const { name, description, image_alt } = req.body
-
 	let image_url = null
+
 	if (req.file) {
+		const filename = `${Date.now()}-${req.file.originalname}`
+		const remotePath = `/var/www/uploads/${filename}`
 		try {
-			image_url = await uploadToCloudinary(req.file.buffer)
-		} catch (error) {
-			return res.status(500).json({ error: error.message })
+			await sftp.connect({
+				host: '93.183.69.97',
+				port: '22',
+				username: 'root',
+				password: 'Bullshit128',
+			})
+			await sftp.put(req.file.buffer, remotePath)
+			image_url = `http://93.183.69.97/uploads/${filename}`
+		} catch (err) {
+			return res.status(500).json({ error: err.message })
+		} finally {
+			sftp.end()
 		}
 	}
 
@@ -92,13 +105,24 @@ app.post('/ComingSoon', upload.single('image'), async (req, res) => {
 
 app.post('/ThisWeek', upload.single('image'), async (req, res) => {
 	const { name, role, description, image_alt } = req.body
-
 	let image_url = null
+
 	if (req.file) {
+		const filename = `${Date.now()}-${req.file.originalname}`
+		const remotePath = `/var/www/uploads/${filename}`
 		try {
-			image_url = await uploadToCloudinary(req.file.buffer)
-		} catch (error) {
-			return res.status(500).json({ error: error.message })
+			await sftp.connect({
+				host: '93.183.69.97',
+				port: '22',
+				username: 'root',
+				password: 'Bullshit128',
+			})
+			await sftp.put(req.file.buffer, remotePath)
+			image_url = `http://93.183.69.97/uploads/${filename}`
+		} catch (err) {
+			return res.status(500).json({ error: err.message })
+		} finally {
+			sftp.end()
 		}
 	}
 
@@ -142,10 +166,21 @@ app.put('/:section/:id', upload.single('image'), async (req, res) => {
 	let image_url = req.body.image_url
 
 	if (req.file) {
+		const filename = `${Date.now()}-${req.file.originalname}`
+		const remotePath = `/var/www/uploads/${filename}`
 		try {
-			image_url = await uploadToCloudinary(req.file.buffer)
-		} catch (error) {
-			return res.status(500).json({ error: error.message })
+			await sftp.connect({
+				host: '93.183.69.97',
+				port: '22',
+				username: 'root',
+				password: 'Bullshit128',
+			})
+			await sftp.put(req.file.buffer, remotePath)
+			image_url = `http://93.183.69.97/uploads/${filename}`
+		} catch (err) {
+			return res.status(500).json({ error: err.message })
+		} finally {
+			sftp.end()
 		}
 	}
 
