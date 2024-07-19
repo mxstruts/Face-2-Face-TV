@@ -1,15 +1,4 @@
-'use client'
-import {
-	Timeline,
-	TimelineItem,
-	TimelineConnector,
-	TimelineHeader,
-	TimelineIcon,
-	TimelineBody,
-	Typography,
-	Avatar,
-} from '@material-tailwind/react'
-
+import { Card, CardBody, Typography, Avatar } from '@material-tailwind/react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { backend_url } from '../../utils/constants'
@@ -21,7 +10,6 @@ function ComingSoon() {
 		const fetchAllComingSoon = async () => {
 			try {
 				const res = await axios.get(`${backend_url}/ComingSoon`)
-				// console.log(res)
 				setComingSoon(res.data)
 			} catch (err) {
 				console.log(err)
@@ -32,53 +20,41 @@ function ComingSoon() {
 
 	return (
 		<div className='max-w-7xl p-8 m-auto'>
-			<div className='flex flex-col md:flex-row mb-8'>
-				<Timeline>
-					{comingSoon.slice(-4).map((item, index) => (
-						<TimelineItem key={index}>
-							<TimelineConnector />
-							<TimelineHeader>
-								<TimelineIcon className='p-0'>
-									{item.image_url ? (
-										<Avatar
-											size='xl'
-											src={item.image_url}
-											alt={`${item.name}'s avatar`}
-											withBorder
-										/>
-									) : (
-										<div className=' bg-gray-200 flex items-center justify-center'>
-											<span>No Image</span>
-										</div>
-									)}
-								</TimelineIcon>
-								<div className='flex flex-col'>
-									<Typography variant='h6' color='blue-gray'>
-										{item.name}
-									</Typography>
-									{/* {item.role && (
-										<Typography variant='small' color='#5a5555bc' className='font-medium text-left'>
-											{item.role}
+			<Card className='w-full'>
+				<CardBody>
+					<div className='mb-4 flex items-center justify-between'>
+						<Typography
+							as='a'
+							href='/FaceToFaceGuests'
+							variant='small'
+							color='blue'
+							className='font-bold'
+						>
+							View all
+						</Typography>
+					</div>
+					<div className='divide-y divide-gray-200'>
+						{comingSoon.slice(-4).map(({ name, description, image_url }, index) => (
+							<div key={index} className='flex items-center justify-between pb-3 pt-3 last:pb-0'>
+								<div className='flex items-center gap-x-3'>
+									<Avatar size='xl' src={image_url} alt={name} />
+
+									<div>
+										<Typography color='blue-gray' variant='h6'>
+											{name}
 										</Typography>
-									)} */}
+										<Typography variant='small' color='gray' className='text-left'>
+											{description}
+										</Typography>
+									</div>
 								</div>
-							</TimelineHeader>
-							<TimelineBody className='pb-5 text-left'>
-								<Typography color='gray' className='font-normal text-gray-600'>
-									{item.description}
-								</Typography>
-							</TimelineBody>
-						</TimelineItem>
-					))}
-				</Timeline>
-			</div>
-			<a
-				href='past-announcements'
-				className='inline-flex justify-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-sky-600 hover:bg-sky-700 hover:translate-x-2 duration-500'
-			>
-				More News
-			</a>
+							</div>
+						))}
+					</div>
+				</CardBody>
+			</Card>
 		</div>
 	)
 }
+
 export default ComingSoon

@@ -22,7 +22,7 @@ const Update = () => {
 				const res = await axios.get(`${backend_url}/${section}/${id}`)
 				setItem(res.data)
 				if (res.data.image_url) {
-					setPreview(`${backend_url}/uploads/${res.data.image_url}`)
+					setPreview(res.data.image_url)
 				}
 			} catch (err) {
 				console.log(err)
