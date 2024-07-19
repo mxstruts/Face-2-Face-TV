@@ -21,7 +21,12 @@ const storage = multer.memoryStorage() // Use memory storage for multer
 const upload = multer({ storage: storage })
 
 app.use(express.json())
-app.use(cors({ origin: '*' }))
+app.use(
+	cors({
+		origin: '*', // Allow all origins or specify your frontend domain
+		methods: 'GET,POST,PUT,DELETE',
+	})
+)
 
 app.get('/', (req, res) => {
 	res.json('Hello World')
