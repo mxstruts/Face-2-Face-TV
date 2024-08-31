@@ -1,5 +1,4 @@
-import { Card, Typography } from '@material-tailwind/react'
-
+import { Card, CardHeader, CardBody, Typography } from '@material-tailwind/react'
 const TABLE_HEAD = ['Name', 'Role']
 
 const TABLE_ROWS = [
@@ -120,44 +119,27 @@ const TABLE_ROWS = [
 	{ Name: 'Cheryl Hardcastle', Role: 'Former MP for Windsor-Tecumseh' },
 ]
 
-export default function GuestsTable() {
+export default function GuestsProfileCards() {
 	return (
-		<Card className='h-full w-full'>
-			<div className='overflow-x-auto'>
-				<table className='w-full min-w-max table-auto text-left'>
-					<thead>
-						<tr>
-							{TABLE_HEAD.map(head => (
-								<th key={head} className='border-b border-blue-gray-100 bg-blue-gray-50 p-4'>
-									<Typography
-										variant='small'
-										color='blue-gray'
-										className='font-normal leading-none opacity-70'
-									>
-										{head}
-									</Typography>
-								</th>
-							))}
-						</tr>
-					</thead>
-					<tbody>
-						{TABLE_ROWS.map(({ Name, Role }, index) => (
-							<tr key={Name} className='even:bg-blue-gray-50/50'>
-								<td className='p-4'>
-									<Typography variant='small' color='blue-gray' className='font-normal'>
-										{Name}
-									</Typography>
-								</td>
-								<td className='p-4'>
-									<Typography variant='small' color='blue-gray' className='font-normal'>
-										{Role}
-									</Typography>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
-			</div>
-		</Card>
+		<div className='flex flex-wrap gap-6 justify-center'>
+			{TABLE_ROWS.map(({ Name, Role }, index) => (
+				<Card key={index} className='w-96'>
+					<CardHeader floated={false} className='h-80'>
+						<img
+							src='https://docs.material-tailwind.com/img/team-3.jpg'
+							alt={`${Name} profile picture`}
+						/>
+					</CardHeader>
+					<CardBody className='text-center'>
+						<Typography variant='h4' color='blue-gray' className='mb-2'>
+							{Name}
+						</Typography>
+						<Typography color='blue-gray' className='font-medium'>
+							{Role}
+						</Typography>
+					</CardBody>
+				</Card>
+			))}
+		</div>
 	)
 }

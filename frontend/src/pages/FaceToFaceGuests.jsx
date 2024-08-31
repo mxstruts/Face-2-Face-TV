@@ -6,7 +6,7 @@ import { ProfileCard } from '../components/Guests/main-card'
 function FaceToFaceGuests() {
 	return (
 		<div>
-			<ProfileCard />
+			{/* <ProfileCard /> */}
 			<GuestsTable />
 		</div>
 	)

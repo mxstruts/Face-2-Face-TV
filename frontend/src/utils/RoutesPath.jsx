@@ -11,6 +11,7 @@ import Hospice from './../pages/Hospice'
 import Update from '../pages/Update'
 import Login from '../pages/Login'
 import ErrorPage from '../pages/ErrorPage'
+import Highlights from '../pages/Highlights'
 
 function RoutesPath() {
 	const [loggedIn, setLoggedIn] = useState(false)
@@ -26,6 +27,8 @@ function RoutesPath() {
 				<Route path='/' element={<Home />} />
 				<Route path='*' element={<ErrorPage />} />
 				<Route path='/Hospice' element={<Hospice />} />
+				<Route path='/Highlights' element={<Highlights />} />
+
 				<Route path='/FaceToFaceGuests' element={<FaceToFaceGuests />} />
 				<Route path='/NurseOfTheYear' element={<NurseOfTheYear />} />
 				<Route path='/Showtimes' element={<Showtimes />} />
