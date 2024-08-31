@@ -14,22 +14,32 @@ import { backend_url } from '../../utils/constants'
 function ThisWeek() {
 	const [thisWeek, setThisWeek] = useState([])
 	const [latestItem, setLatestItem] = useState(null)
+	const [loading, setLoading] = useState(true)
 
 	useEffect(() => {
 		const fetchAllThisWeek = async () => {
 			try {
 				const res = await axios.get(`${backend_url}/ThisWeek`)
-				console.log(res)
 				setThisWeek(res.data)
 				const mostRecentItem = res.data[res.data.length - 1]
 				setLatestItem(mostRecentItem)
-				console.log(mostRecentItem)
+				setLoading(false) // Stop loading once data is fetched
 			} catch (err) {
 				console.log(err)
+				setLoading(false) // Stop loading in case of error
 			}
 		}
 		fetchAllThisWeek()
 	}, [])
+
+	if (loading) {
+		return (
+			<div className='flex justify-center items-center p-8'>
+				<div className='animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500 border-solid border-gray-200'></div>
+			</div>
+		)
+	}
+
 	return (
 		<div className='max-w-7xl p-8 m-auto'>
 			<div className='flex flex-col md:flex-row mb-8'>
@@ -71,7 +81,7 @@ function ThisWeek() {
 						</CardFooter>
 					</Card>
 				) : (
-					<p className='text-center'>No items available</p>
+					<p className='text-center text-xl text-gray-600'>More coming</p>
 				)}
 			</div>
 			<a
@@ -83,4 +93,5 @@ function ThisWeek() {
 		</div>
 	)
 }
+
 export default ThisWeek

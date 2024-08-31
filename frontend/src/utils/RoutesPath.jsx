@@ -10,6 +10,7 @@ import AddThisWeek from '../pages/AddThisWeek'
 import Hospice from './../pages/Hospice'
 import Update from '../pages/Update'
 import Login from '../pages/Login'
+import ErrorPage from '../pages/ErrorPage'
 
 function RoutesPath() {
 	const [loggedIn, setLoggedIn] = useState(false)
@@ -23,6 +24,7 @@ function RoutesPath() {
 		<Router>
 			<Routes>
 				<Route path='/' element={<Home />} />
+				<Route path='*' element={<ErrorPage />} />
 				<Route path='/Hospice' element={<Hospice />} />
 				<Route path='/FaceToFaceGuests' element={<FaceToFaceGuests />} />
 				<Route path='/NurseOfTheYear' element={<NurseOfTheYear />} />
